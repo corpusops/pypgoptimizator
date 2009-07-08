@@ -11,13 +11,15 @@ setup(
     package_dir = {'': 'src'},
     license='BSD',
     include_package_data=True,
-    long_description=reame,
+    long_description=readme,
+    namespace_packages=['pypgoptimizator'],
     install_requires=[
-    'steuptools'
+    'setuptools'
     ],
     entry_points = {
     'console_scripts': [
-    'pypgoptimizator = pypgoptimizator:main',
+    'pypgoptimizator = pypgoptimizator.pypgoptimizator:main',
     ],
+    }
 
 )
