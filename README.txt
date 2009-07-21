@@ -25,7 +25,7 @@ HELP
 Parameters
 ---------------
 
-    - *-b*: The shared buffer size. It's  by default, and it can be changed at
+    - *-b*: The shared buffer size. It's 8192 by default, and it can be changed at
       compilation time, pgsql side.
     - *-l*: The output logs filename scheme (log_filename paramater)
     - *-o*: The output file to write into
