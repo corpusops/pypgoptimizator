@@ -10,6 +10,22 @@ import re
 def sexec(cmd):
     return os.popen(cmd).read()[:-1]
 
+def integer_to_memory_str(value):
+    left = value
+    integer_to_memory_str_value = ''
+    matched = False
+    for level, letter in ((1000000000, 'GB'), (1000000, 'MB'), (1000, 'kB')):
+        res = float(left) / level
+        round_level = left / level
+        left = left - round_level * level
+        if res > 1:
+            integer_to_memory_str_value += '%s%s' % (round_level, letter)
+            matched = True
+            break
+    if not matched:
+        integer_to_memory_str_value += '%s' % (left)
+    return integer_to_memory_str_value
+
 def main():
     parser = optparse.OptionParser("usage: %prog --help for usage")
     parser.add_option("-p", dest="memory",
@@ -72,8 +88,10 @@ def main():
     # 1 buffer = 8192 bytes by default
     shared_buffers = (TotalBytes*25/100) / options.bs
     wm = (shared_buffers*10/100)
+    effective_cache_size = integer_to_memory_str(TotalBytes*50/100)
     pgvals = {
         'shared_buffers': shared_buffers,
+        #'effective_cache_size': "'%s'" %  effective_cache_size,
         'effective_cache_size': shared_buffers*50/100,
         'sort_mem': wm,
         'wal_buffers': wm,
