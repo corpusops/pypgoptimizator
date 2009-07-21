@@ -5,7 +5,7 @@ readme = open('README.txt').read()
 
 setup(
     name='pypgoptimizator',
-    version="1.0",
+    version="1.1",
     description='Postgresql configuration optimizator',
     packages=find_packages('src'),
     package_dir = {'': 'src'},
