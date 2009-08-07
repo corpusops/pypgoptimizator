@@ -1,11 +1,11 @@
-from setuptools import setup, find_packages
+from  setuptools import setup, find_packages
 
 
 readme = open('README.txt').read()
 
 setup(
     name='pypgoptimizator',
-    version="1.2",
+    version="1.4",
     description='Postgresql configuration optimizator',
     packages=find_packages('src'),
     url="http://git.minitage.org/git/others/pypgoptimizator/",

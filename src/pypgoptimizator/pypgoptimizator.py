@@ -30,7 +30,7 @@ def main():
     parser = optparse.OptionParser("usage: %prog --help for usage")
     parser.add_option("-p", dest="memory",
                       default="", type="string",
-                      help="Total memory in Kbytes, default to all available memory")
+                      help="Total memory in bytes, default to all available memory")
 
     parser.add_option("-i", dest="input",
                       default="", type="string",
@@ -57,14 +57,14 @@ def main():
     if not os.path.exists(pgconf):
         print "Please provide a valid postgresql.conf"
         sys.exit(-1)
-    
+
     # KERNEL OPTIMIZATION
     TotalKbytes = int(sexec("awk '/MemTotal:/ { print $2 }' /proc/meminfo"))
     # half of ree mem +cached
     if sys.platform == 'linux2':
         stmt = sexec("free 2>&1|grep Mem |awk '{print $3 \"+\" $7}'")
         exec "TotalKbytes=%s" % stmt
-    
+
     TotalBytes = TotalKbytes * 1024
     PageSize = int(sexec('getconf PAGE_SIZE'))
     ShmallValue = TotalBytes/PageSize
@@ -78,7 +78,7 @@ def main():
         print sexec('sysctl -w %s=%s' %(value, kv[value]))
         if os.path.isfile('/etc/sysctl.conf'):
             if not '%s = %s' % (value, kv[value]) in open('/etc/sysctl.conf').read():
-                sexec('echo %s = %s>>/etc/sysctl.conf' % (value, kv[value]))
+                sexec('echo "%s = %s">>/etc/sysctl.conf' % (value, kv[value]))
 
     # POSTGRESQL OPTIMIZATION
     print "Postgresql Configuration:"
@@ -104,7 +104,7 @@ def main():
 
         'random_page_cost': 2,
         'wal_buffers': 64,
-        
+
         'vacuum_mem': '32MB',
         'maintenance_work_mem': '256MB',
 
