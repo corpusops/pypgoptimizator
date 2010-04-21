@@ -6,7 +6,7 @@ readme = open('README.txt').read()
 setup(
     name='pypgoptimizator',
     version="1.4",
-    description='Postgresql configuration optimizator',
+    description='Postgresql configuration optimizator sponsorised by Makina Corpus',
     packages=find_packages('src'),
     url="http://git.minitage.org/git/others/pypgoptimizator/",
     package_dir = {'': 'src'},
