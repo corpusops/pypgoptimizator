@@ -1,7 +1,7 @@
 from  setuptools import setup, find_packages
 
 
-readme = open('README.txt').read()
+readme = open('README.rst').read()
 
 setup(
     name='pypgoptimizator',
